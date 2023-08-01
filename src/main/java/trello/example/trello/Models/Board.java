@@ -4,27 +4,31 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.Map;
 
-import java.awt.*;
-import java.util.List;
 
 @Setter
 @Getter
-@Entity
 @Data
-@Table(name = "BoardTable")
-public class Board extends BaseEntity {
+@Entity
+public class Board extends BaseEntity{
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Long id ;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long boardId;
 
+    private String name;
 
-    String Title ;
-    String List ;
-    String Section ;
+    public String title ;
 
-    @JoinColumn(name = "CardsID", referencedColumnName = "id")
-    @OneToMany(cascade = CascadeType.ALL)
-    List<Cards> cardsList;
+    @ElementCollection
+    @CollectionTable(name = "board_columns", joinColumns = @JoinColumn(name = "board_id"))
+    @MapKeyColumn(name = "column_index")
+    @Column(name = "column_name")
+    private Map<Integer, String> columns;
 
+    // Constructors, getters, and setters
 }
+
+
+

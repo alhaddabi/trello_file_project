@@ -8,18 +8,17 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@Entity
 @Data
-public class Cards {
+@Entity
+public class Cards{
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Long id ;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long cardId;
 
-    String Title ;
+    private String title;
+    private String description;
+    private int section;
 
-    String Description ;
-
-    String Section ;
-
-
+    // Constructors, getters, and setters
 }
